@@ -2,7 +2,7 @@
 #include <fstream>
 using namespace std;
 
-ifstream f("input.in");
+//ifstream f("input.in");
 ofstream g("output.out");
 
 struct mon_struct{
@@ -260,8 +260,13 @@ int kLeaElement(mon_struct* rad, int k)
 }
 
 int main() {
-   
-    unsigned x, N; //numarul de noduri
+    
+    ifstream f;
+    string files[] = {"input.in", "in1.in", "in2.in", "in3.in", "in4.in", "in5.in", "in6.in"};
+    int file_number = 6; // se deschide fisierul cu indicele respectiv
+    f.open(files[file_number]);
+
+    int x, N; //numarul de noduri
     f>>N;
     mon_struct *v = nullptr;
     //Input arbore
@@ -279,33 +284,40 @@ int main() {
     g <<"Cardinalul initial este: "<<Cardinal(v)<<"\n";
 
     //Stergere si parcurgere dupa stergerea elementului
-    stergere(v,30);
+    f >> x;
+    stergere(v, x);
     parcurgere(v); g<<"\n";
 
     // Noul Cardinal
     g <<"Noul cardinal este: "<<Cardinal(v)<<"\n";
 
-    // Al k-lea element si parcurgerea dupa stergere
-    g <<"Al 3 lea element este: "<<kLeaElement(v,3)<<"\n";
-    parcurgere(v); g<<"\n";
+    // Al k-lea element
+    f >> x;
+    g <<"Al "<<x<<"-lea element este: "<<kLeaElement(v, x) <<"\n";
+    //parcurgere(v); g<<"\n";
     g <<'\n';
 
     // Un element se afla sau nu in arbore
-    g << este_in(v, 10)<<' '<< este_in(v,9)<<'\n';
+    int y;
+    f>>x>>y;
+    g << este_in(v, x)<<' '<< este_in(v, y)<<'\n';
 
     // Predecesor
-    g << predecesor(v, 10)<< ' '<<predecesor(v, 9)<<' '<<predecesor(v,20)<<'\n';
+    int z;
+    f>>x>>y>>z;
+    g << predecesor(v, x)<< ' '<<predecesor(v, y)<<' '<<predecesor(v,z)<<'\n';
 
     // Succesor
-    g << succesor(v, 10)<< ' '<< succesor(v, 9)<<' '<< succesor(v,30)<<'\n';
+    f>>x>>y>>z;
+    g << succesor(v, x)<< ' '<< succesor(v, y)<<' '<< succesor(v, z)<<'\n';
 
+    f.close();
     // Max - min
     g << max(v)<< ' '<< min(v)<<'\n';
+    
+    //parcurgere(v);
 
-    stergere(v, 10);
-    stergere(v, 30);
-    parcurgere(v);
-
+    g.close();
 
     return 0;
 }
