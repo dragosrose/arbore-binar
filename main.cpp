@@ -244,21 +244,21 @@ int Cardinal(mon_struct *nod){
 }
 
 
-int kLeaElement(mon_struct* rad, int k)
+mon_struct* kleaElement(mon_struct* rad, int k)
 {
-    // base case
-    if (rad == NULL)
-        return NULL;
+  
+    if (rad == nullptr)
+        return nullptr;
+ 
+    int count = rad->lCount + 1;
+    if (count == k)
+        return rad;
+ 
+    if (count > k)
+        return kleaElement(rad->stanga, k);
+ 
 
-    int ccount = rad->lCount + 1;
-    if (ccount == k)
-        return rad->value;
-
-    if (ccount > k)
-        return kLeaElement(rad->stanga, k);
-
-    // else search in right subtree
-    return kLeaElement(rad->dreapta, k - ccount);
+    return kleaElement(rad->dreapta, k - count);
 }
 
 int main() {
@@ -295,7 +295,7 @@ int main() {
 
     // Al k-lea element
     f >> x;
-    g <<"Al "<<x<<"-lea element este: "<<kLeaElement(v, x) <<"\n";
+    g <<"Al "<<x<<"-lea element este: "<<kleaElement(v, x) <<"\n";
     //parcurgere(v); g<<"\n";
     g <<'\n';
 
