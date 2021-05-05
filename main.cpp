@@ -264,8 +264,8 @@ int kLeaElement(mon_struct* rad, int k)
 int main() {
 
     ifstream f;
-    string files[] = {"input.in", "in1.in", "in2.in", "in3.in", "in4.in", "in5.in", "in6.in"};
-    int file_number = 6; // se deschide fisierul cu indicele respectiv
+    string files[] = {"input.in", "in1.in", "in2.in", "in3.in", "in4.in", "in5.in", "in6.in", "in7.in"};
+    int file_number = 7; // se deschide fisierul cu indicele respectiv
     f.open(files[file_number]);
 
     int x, N; //numarul de noduri
